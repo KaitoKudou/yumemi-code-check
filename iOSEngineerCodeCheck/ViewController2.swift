@@ -27,7 +27,6 @@ class ViewController2: UIViewController {
         super.viewDidLoad()
         
         let repo = vc1.repo[vc1.idx]
-        print(repo)
         
         LangLbl.text = "Written in \(repo["language"] as? String ?? "")"
         StrsLbl.text = "\(repo["stargazers_count"] as? Int ?? 0) stars"

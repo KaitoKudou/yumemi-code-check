@@ -27,10 +27,11 @@ class ViewController2: UIViewController {
         super.viewDidLoad()
         
         let repo = vc1.repo[vc1.idx]
+        print(repo)
         
         LangLbl.text = "Written in \(repo["language"] as? String ?? "")"
         StrsLbl.text = "\(repo["stargazers_count"] as? Int ?? 0) stars"
-        WchsLbl.text = "\(repo["wachers_count"] as? Int ?? 0) watchers"
+        WchsLbl.text = "\(repo["watchers_count"] as? Int ?? 0) watchers"
         FrksLbl.text = "\(repo["forks_count"] as? Int ?? 0) forks"
         IsssLbl.text = "\(repo["open_issues_count"] as? Int ?? 0) open issues"
         getImage()
@@ -45,10 +46,11 @@ class ViewController2: UIViewController {
         
         if let owner = repo["owner"] as? [String: Any] {
             if let imgURL = owner["avatar_url"] as? String {
-                URLSession.shared.dataTask(with: URL(string: imgURL)!) { (data, res, err) in
+                URLSession.shared.dataTask(with: URL(string: imgURL)!) { [weak self] (data, res, err) in
+                    guard self == self else { return }
                     let img = UIImage(data: data!)!
                     DispatchQueue.main.async {
-                        self.ImgView.image = img
+                        self?.ImgView.image = img
                     }
                 }.resume()
             }

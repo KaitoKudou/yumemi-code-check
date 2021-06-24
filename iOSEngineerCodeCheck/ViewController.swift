@@ -41,7 +41,10 @@ class ViewController: UITableViewController, UISearchBarDelegate {
         word = searchBar.text!
         
         if word.count != 0 {
-            url = "https://api.github.com/search/repositories?q=\(word!)"
+            guard let wordEncode = word.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else {
+                return
+            }
+            url = "https://api.github.com/search/repositories?q=\(wordEncode)"
             task = URLSession.shared.dataTask(with: URL(string: url)!) { [weak self] (data, res, err) in
                 guard self == self else { return }
                 if let obj = try! JSONSerialization.jsonObject(with: data!) as? [String: Any] {

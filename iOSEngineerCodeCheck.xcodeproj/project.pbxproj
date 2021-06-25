@@ -88,6 +88,15 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		4467221626865AB50012CDB5 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				44672214268658420012CDB5 /* RepositoriesTableViewController.swift */,
+				44672210268655950012CDB5 /* RepositoryDetailViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		BFD945D2244DC5E80012785A = {
 			isa = PBXGroup;
 			children = (
@@ -114,8 +123,7 @@
 				BFD945DE244DC5E80012785A /* AppDelegate.swift */,
 				BFD945E0244DC5E80012785A /* SceneDelegate.swift */,
 				440F26272684F72200FC17AD /* Model */,
-				44672214268658420012CDB5 /* RepositoriesTableViewController.swift */,
-				44672210268655950012CDB5 /* RepositoryDetailViewController.swift */,
+				4467221626865AB50012CDB5 /* View */,
 				BFD945E4244DC5E80012785A /* Main.storyboard */,
 				BFD945E7244DC5EB0012785A /* Assets.xcassets */,
 				BFD945E9244DC5EB0012785A /* LaunchScreen.storyboard */,

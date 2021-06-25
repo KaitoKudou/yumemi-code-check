@@ -22,38 +22,34 @@ class ViewController2: UIViewController {
     @IBOutlet weak var IsssLbl: UILabel!
     
     var vc1: ViewController!
+    var item: Item?
         
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        let repo = vc1.repo[vc1.idx]
-        
-        LangLbl.text = "Written in \(repo["language"] as? String ?? "")"
-        StrsLbl.text = "\(repo["stargazers_count"] as? Int ?? 0) stars"
-        WchsLbl.text = "\(repo["wachers_count"] as? Int ?? 0) watchers"
-        FrksLbl.text = "\(repo["forks_count"] as? Int ?? 0) forks"
-        IsssLbl.text = "\(repo["open_issues_count"] as? Int ?? 0) open issues"
-        getImage()
-        
+        guard let item = item else { return }
+        configure(item: item)
     }
     
-    func getImage(){
+    private func configure(item: Item) {
+        TtlLbl.text = item.fullName
+        LangLbl.text = item.language.map { "Written in \($0)" }
+        StrsLbl.text = "\(item.stargazersCount) stars"
+        WchsLbl.text = "\(item.watchersCount) watchers"
+        FrksLbl.text = "\(item.forksCount) forks"
+        IsssLbl.text = "\(item.openIssuesCount) open issues"
         
-        let repo = vc1.repo[vc1.idx]
-        
-        TtlLbl.text = repo["full_name"] as? String
-        
-        if let owner = repo["owner"] as? [String: Any] {
-            if let imgURL = owner["avatar_url"] as? String {
-                URLSession.shared.dataTask(with: URL(string: imgURL)!) { (data, res, err) in
-                    let img = UIImage(data: data!)!
-                    DispatchQueue.main.async {
-                        self.ImgView.image = img
-                    }
-                }.resume()
+        guard let avatarUrl = URL(string: item.owner.avatarUrl) else { return }
+        getAvatarImage(url: avatarUrl)
+    }
+    
+    func getAvatarImage(url: URL){
+        URLSession.shared.dataTask(with: url) { [weak self] (data, res, err) in
+            guard let data = data else { return }
+            let avatarImage = UIImage(data: data)
+            DispatchQueue.main.async {
+                self?.ImgView.image = avatarImage
             }
-        }
-        
+        }.resume()
     }
     
 }

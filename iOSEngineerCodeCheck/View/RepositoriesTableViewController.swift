@@ -14,7 +14,7 @@ class RepositoriesTableViewController: UITableViewController {
     
     private var task: URLSessionTask?
     private var requestUrl: String!
-    var index: Int!
+    var index = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()

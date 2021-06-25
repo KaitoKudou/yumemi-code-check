@@ -42,7 +42,7 @@ class RepositoryDetailViewController: UIViewController {
     private func getAvatarImage(url: URL) {
         URLSession.shared.dataTask(with: url) { [weak self] (data, res, err) in
             guard let data = data else { return }
-            let avatarImage = UIImage(data: data)
+            guard let avatarImage = UIImage(data: data) else { return }
             
             DispatchQueue.main.async {
                 self?.avatarImageView.image = avatarImage

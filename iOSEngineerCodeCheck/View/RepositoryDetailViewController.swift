@@ -22,20 +22,20 @@ class RepositoryDetailViewController: UIViewController {
         
     override func viewDidLoad() {
         super.viewDidLoad()
-        guard let item = item else { return }
-        configure(item: item)
+        guard let repository = item else { return }
+        configure(repository: repository)
     }
     
     // MARK: - methods
-    private func configure(item: Item) {
-        titleLabel.text = item.fullName
-        languageLabel.text = item.language.map { "Written in \($0)" }
-        starsLabel.text = "\(item.stargazersCount) stars"
-        watchersLabel.text = "\(item.watchersCount) watchers"
-        forksLabel.text = "\(item.forksCount) forks"
-        issuesLabel.text = "\(item.openIssuesCount) open issues"
+    func configure(repository: Item) {
+        titleLabel.text = repository.fullName
+        languageLabel.text = repository.language.map { "Written in \($0)" }
+        starsLabel.text = "\(repository.stargazersCount) stars"
+        watchersLabel.text = "\(repository.watchersCount) watchers"
+        forksLabel.text = "\(repository.forksCount) forks"
+        issuesLabel.text = "\(repository.openIssuesCount) open issues"
         
-        guard let avatarUrl = URL(string: item.owner.avatarUrl) else { return }
+        guard let avatarUrl = URL(string: repository.owner.avatarUrl) else { return }
         getAvatarImage(url: avatarUrl)
     }
     

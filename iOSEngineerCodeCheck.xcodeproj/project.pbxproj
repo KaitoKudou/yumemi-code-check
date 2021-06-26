@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		440F26292684F76400FC17AD /* GitHubSearchResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440F26282684F76400FC17AD /* GitHubSearchResponse.swift */; };
+		4432946126877F760090BEC4 /* RepositoriesTableViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4432946026877F760090BEC4 /* RepositoriesTableViewPresenter.swift */; };
+		44329463268788EF0090BEC4 /* SearchModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44329462268788EF0090BEC4 /* SearchModel.swift */; };
 		44672211268655950012CDB5 /* RepositoryDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44672210268655950012CDB5 /* RepositoryDetailViewController.swift */; };
 		44672215268658420012CDB5 /* RepositoriesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44672214268658420012CDB5 /* RepositoriesTableViewController.swift */; };
 		BFD945DF244DC5E80012785A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD945DE244DC5E80012785A /* AppDelegate.swift */; };
@@ -38,6 +40,8 @@
 
 /* Begin PBXFileReference section */
 		440F26282684F76400FC17AD /* GitHubSearchResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubSearchResponse.swift; sourceTree = "<group>"; };
+		4432946026877F760090BEC4 /* RepositoriesTableViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoriesTableViewPresenter.swift; sourceTree = "<group>"; };
+		44329462268788EF0090BEC4 /* SearchModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchModel.swift; sourceTree = "<group>"; };
 		44672210268655950012CDB5 /* RepositoryDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryDetailViewController.swift; sourceTree = "<group>"; };
 		44672214268658420012CDB5 /* RepositoriesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoriesTableViewController.swift; sourceTree = "<group>"; };
 		BFD945DB244DC5E80012785A /* iOSEngineerCodeCheck.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOSEngineerCodeCheck.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -84,8 +88,17 @@
 			isa = PBXGroup;
 			children = (
 				440F26282684F76400FC17AD /* GitHubSearchResponse.swift */,
+				44329462268788EF0090BEC4 /* SearchModel.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		4432945F26877EC20090BEC4 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				4432946026877F760090BEC4 /* RepositoriesTableViewPresenter.swift */,
+			);
+			path = Presenter;
 			sourceTree = "<group>";
 		};
 		4467221626865AB50012CDB5 /* View */ = {
@@ -123,6 +136,7 @@
 				BFD945DE244DC5E80012785A /* AppDelegate.swift */,
 				BFD945E0244DC5E80012785A /* SceneDelegate.swift */,
 				440F26272684F72200FC17AD /* Model */,
+				4432945F26877EC20090BEC4 /* Presenter */,
 				4467221626865AB50012CDB5 /* View */,
 				BFD945E4244DC5E80012785A /* Main.storyboard */,
 				BFD945E7244DC5EB0012785A /* Assets.xcassets */,
@@ -283,7 +297,9 @@
 			files = (
 				440F26292684F76400FC17AD /* GitHubSearchResponse.swift in Sources */,
 				44672211268655950012CDB5 /* RepositoryDetailViewController.swift in Sources */,
+				4432946126877F760090BEC4 /* RepositoriesTableViewPresenter.swift in Sources */,
 				BFD945DF244DC5E80012785A /* AppDelegate.swift in Sources */,
+				44329463268788EF0090BEC4 /* SearchModel.swift in Sources */,
 				BFD945E1244DC5E80012785A /* SceneDelegate.swift in Sources */,
 				44672215268658420012CDB5 /* RepositoriesTableViewController.swift in Sources */,
 			);

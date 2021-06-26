@@ -10,56 +10,37 @@ import UIKit
 
 class RepositoriesTableViewController: UITableViewController {
     @IBOutlet weak var repositorySearchBar: UISearchBar!
-    private var items: [Item] = []
-    
-    private var task: URLSessionTask?
-    private var requestUrl: String!
+    private var presenter: RepositoriesTableViewPresenterInput!
     var index = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
         repositorySearchBar.text = "GitHubのリポジトリを検索できるよー"
         repositorySearchBar.delegate = self
+        presenter = RepositoriesTableViewPresenter(view: self, model: SearchModel())
+        inject(presenter: presenter)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "Detail"{
             guard let repositoryDetailViewController = segue.destination as? RepositoryDetailViewController else { return }
-            repositoryDetailViewController.item = items[index]
+            repositoryDetailViewController.item = presenter.repositories[index]
         }
     }
     
     // MARK: - methods
-    private func fetchRepositories(keyWord: String) {
-        if keyWord.count != 0 {
-            guard let wordEncode = keyWord.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else { return }
-            requestUrl = "https://api.github.com/search/repositories?q=\(wordEncode)"
-            task = URLSession.shared.dataTask(with: URL(string: requestUrl)!) { [weak self] (data, res, err) in
-                guard let data = data else { return }
-                do {
-                    let repositories = try JSONDecoder().decode(GitHubSearchResponse.self, from: data)
-                    self?.items = repositories.items
-                    
-                    DispatchQueue.main.async {
-                        self?.tableView.reloadData()
-                    }
-                    
-                } catch let error {
-                    print(error)
-                }
-            }
-            task?.resume()
-        }
+    func inject(presenter: RepositoriesTableViewPresenterInput) {
+        self.presenter = presenter
     }
     
     // MARK: - TableView data source/delegate
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return items.count
+        return presenter.numberOfRepositories
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell()
-        let repository = items[indexPath.row]
+        let repository = presenter.repositories[indexPath.row]
         cell.textLabel?.text = repository.fullName
         cell.detailTextLabel?.text = repository.language
         return cell
@@ -67,7 +48,7 @@ class RepositoriesTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         index = indexPath.row
-        performSegue(withIdentifier: "Detail", sender: self)
+        presenter.didSelectRow(at: indexPath.row)
     }
     
 }
@@ -80,12 +61,26 @@ extension RepositoriesTableViewController: UISearchBarDelegate {
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        task?.cancel()
+        presenter.cancel()
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         guard let keyWord = searchBar.text else { return }
-        fetchRepositories(keyWord: keyWord)
-        searchBar.resignFirstResponder()
+        presenter.didTapSearchbarButton(text: keyWord)
+    }
+}
+
+// MARK: - RepositoriesTableViewPresenterOutput
+extension RepositoriesTableViewController: RepositoriesTableViewPresenterOutput {
+    func reloadRepositoriesTableView() {
+        tableView.reloadData()
+    }
+    
+    func keyboardClose() {
+        repositorySearchBar.resignFirstResponder()
+    }
+    
+    func showRepositoryDetailView(index: Int) {
+        performSegue(withIdentifier: "Detail", sender: self)
     }
 }

@@ -24,8 +24,8 @@ protocol RepositoriesTableViewPresenterOutput: AnyObject {
 }
 
 class RepositoriesTableViewPresenter: RepositoriesTableViewPresenterInput {
-    private weak var view: RepositoriesTableViewPresenterOutput!
-    private var model: SearchModelProtocol!
+    weak var view: RepositoriesTableViewPresenterOutput!
+    var model: SearchModelProtocol!
     private(set) var repositories: [Item] = []
     
     

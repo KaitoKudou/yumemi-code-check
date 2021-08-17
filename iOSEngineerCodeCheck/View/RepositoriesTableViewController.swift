@@ -15,7 +15,7 @@ class RepositoriesTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        repositorySearchBar.text = "GitHubのリポジトリを検索できるよー"
+        repositorySearchBar.placeholder = "GitHubのリポジトリを検索できるよー"
         repositorySearchBar.delegate = self
         repositorySearchBar.accessibilityIdentifier = "RepositoriesTableViewController_searchBar"
         presenter = RepositoriesTableViewPresenter(view: self, model: SearchModel())
